@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; color: #333; }
+    h2 { text-align: center; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    td, th { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    .no-border td { border: none; }
+    .section-title { margin-top: 30px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>Invoice - Lakshmi Motors (Ashok Leyland)</h2>
+
+  <p><strong>Invoice No:</strong> <%= invoiceNo %> | <strong>Date:</strong> <%= date %></p>
+  <p><strong>IRN No:</strong> <%= irnNo %> | <strong>ACK No:</strong> <%= ackNo %></p>
+
+  <div class="section-title">Buyer Details</div>
+  <table class="no-border">
+    <tr><td><strong>Name:</strong></td><td><%= buyer.name %></td></tr>
+    <tr><td><strong>Address:</strong></td><td><%= buyer.address %></td></tr>
+    <tr><td><strong>GSTIN:</strong></td><td><%= buyer.gstin %></td></tr>
+    <tr><td><strong>Phone:</strong></td><td><%= buyer.phone %></td></tr>
+    <tr><td><strong>State Code:</strong></td><td><%= buyer.stateCode %></td></tr>
+  </table>
+
+  <div class="section-title">Consignor Details</div>
+  <table class="no-border">
+    <tr><td><strong>Name:</strong></td><td><%= consignor.name %></td></tr>
+    <tr><td><strong>Address:</strong></td><td><%= consignor.address %></td></tr>
+    <tr><td><strong>GSTIN:</strong></td><td><%= consignor.gstin %></td></tr>
+    <tr><td><strong>Phone:</strong></td><td><%= consignor.phone %></td></tr>
+    <tr><td><strong>State Code:</strong></td><td><%= consignor.stateCode %></td></tr>
+  </table>
+
+  <div class="section-title">Vehicle Details</div>
+  <table class="no-border">
+    <tr><td><strong>Model:</strong></td><td><%= model %></td></tr>
+    <tr><td><strong>Variant:</strong></td><td><%= variant %></td></tr>
+    <tr><td><strong>Color:</strong></td><td><%= vehicleColor %></td></tr>
+    <tr><td><strong>Chassis No:</strong></td><td><%= chassisNo %></td></tr>
+    <tr><td><strong>Engine No:</strong></td><td><%= engineNo %></td></tr>
+    <tr><td><strong>PAN:</strong></td><td><%= panNo %></td></tr>
+    <tr><td><strong>Hypothecated To:</strong></td><td><%= hypothecatedTo %></td></tr>
+  </table>
+
+  <div class="section-title">Invoice Items</div>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Particular</th>
+        <th>HSN</th>
+        <th>GST%</th>
+        <th>Qty</th>
+        <th>Rate</th>
+        <th>Per</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% items.forEach((item, i) => { %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <td><%= item.particular %></td>
+          <td><%= item.hsn %></td>
+          <td><%= item.gst %></td>
+          <td><%= item.qty %></td>
+          <td><%= item.rate %></td>
+          <td><%= item.per %></td>
+          <td><%= item.amount %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <div class="section-title">Tax Summary</div>
+  <table>
+    <thead>
+      <tr>
+        <th>HSN</th>
+        <th>Taxable</th>
+        <th>CGST%</th>
+        <th>CGST Amt</th>
+        <th>SGST%</th>
+        <th>SGST Amt</th>
+        <th>Total Tax</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% taxSummary.forEach(row => { %>
+        <tr>
+          <td><%= row.hsn %></td>
+          <td><%= row.taxable %></td>
+          <td><%= row.cgst %></td>
+          <td><%= row.cgstAmt %></td>
+          <td><%= row.sgst %></td>
+          <td><%= row.sgstAmt %></td>
+          <td><%= row.totalTax %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <div class="section-title">Footer</div>
+  <p><strong>Amount in Words:</strong> <%= amountWords %></p>
+  <p><strong>Declaration:</strong> <%= declaration %></p>
+  <p style="text-align: right;"><strong>Authorized Signatory:</strong> <%= signatory %></p>
+</body>
+</html>
